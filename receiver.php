@@ -1,14 +1,17 @@
 <?php
-$uploadDir = "uploads/";
-$filename = "cam.jpg";
+$uploadDir = __DIR__ . '/uploads/';
+if (!is_dir($uploadDir)) {
+    mkdir($uploadDir, 0755, true);
+}
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['image'])) {
-    $tmpName = $_FILES['image']['tmp_name'];
-    move_uploaded_file($tmpName, $uploadDir . $filename);
+$data = file_get_contents('php://input');
+if ($data) {
+    $filePath = $uploadDir . 'cam.jpg';
+    file_put_contents($filePath, $data);
     http_response_code(200);
-    echo "Bild empfangen";
+    echo "Upload successful";
 } else {
     http_response_code(400);
-    echo "Ungültige Anfrage";
+    echo "No data received";
 }
 ?>
