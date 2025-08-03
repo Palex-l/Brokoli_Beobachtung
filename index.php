@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
-  <title>ESP32-CAM Live Stream</title>
+  <title>Live-Cam</title>
+  <meta http-equiv="refresh" content="10">
+  <style>
+    body { text-align: center; font-family: sans-serif; background: #111; color: white; }
+    img { max-width: 90%; border: 5px solid white; margin-top: 20px; }
+  </style>
 </head>
 <body>
-  <h1>Live-Bild von der ESP32-CAM</h1>
-  <img id="cam" src="uploads/cam.jpg?t=0" width="640">
-  <script>
-    setInterval(() => {
-      document.getElementById('cam').src = 'uploads/cam.jpg?t=' + new Date().getTime();
-    }, 500); // alle 0.5 Sekunden neu laden
-  </script>
+  <h1>Aktuelles Bild der ESP32-CAM</h1>
+  <img src="uploads/cam.jpg?<?php echo time(); ?>" alt="Live Bild">
+  <p>Letztes Update: <?php echo date("H:i:s"); ?></p>
 </body>
 </html>
