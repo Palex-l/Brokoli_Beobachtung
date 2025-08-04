@@ -76,7 +76,7 @@ function updateLog() {
 setInterval(() => {
   updateImage();
   updateLog();
-}, 10000);
+}, 500);
 
 // Initial einmal aufrufen
 updateImage();
