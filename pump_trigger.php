@@ -10,6 +10,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['ml'])) {
 
     // 2. Neuer Pumpbefehl: eintragen
     if ($ml > 200) {
+      // In Log schreiben
+      $time = date("Y-m-d H:i:s");
+      $entry = "$time - ❌ Ungültige Eingabe: $ml ml (zu groß)\n";
+      file_put_contents('log.txt', $entry, FILE_APPEND);
+ 
+      // Fehlermeldung zurück zur Website
       header('Location: index.php?error=toobig');
       exit;
     }
