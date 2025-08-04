@@ -13,4 +13,9 @@
   <img src="uploads/cam.jpg?<?php echo time(); ?>" alt="Live Bild">
   <p>Letztes Update: <?php echo date("H:i:s"); ?></p>
 </body>
+  <form method="POST" action="dose.php">
+  <label for="ml">Milliliter:</label>
+  <input type="number" name="ml" min="1" max="1000" required>
+  <button type="submit">Pumpe starten</button>
+</form>
 </html>
