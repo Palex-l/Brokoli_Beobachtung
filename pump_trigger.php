@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['ml'])) {
         header('Location: index.php?ok=1');
         
         // 3. Warte 20 Sekunden auf Verarbeitung durch ESP
-        sleep(20);
+        sleep(60);
         
         // 4. Prüfen ob Auftrag noch da (→ ESP hat nicht abgeholt)
         $remaining = file_exists('pump_queue.txt') ? trim(file_get_contents('pump_queue.txt')) : '';
