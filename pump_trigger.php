@@ -27,7 +27,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['ml'])) {
         // Funktioniert nur, wenn dein Render-Container >20s Scriptausführung erlaubt
         ignore_user_abort(true);
         flush(); // sende Antwort sofort
-        echo "Befehl angenommen"; // für ESP sichtbar
+        //echo "Befehl angenommen"; // für ESP sichtbar
         exit;
         
         // 3. Warte 20 Sekunden auf Verarbeitung durch ESP
