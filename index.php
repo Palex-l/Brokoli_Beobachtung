@@ -7,7 +7,6 @@ $lines = array_reverse(explode("\n", trim($log))); // Jüngste Einträge oben
 <html>
 <head>
   <title>ESP32 Cam + Pumpe</title>
-  <meta http-equiv="refresh" content="10">
   <style>
     body { text-align: center; font-family: sans-serif; background: #111; color: white; }
     img { max-width: 90%; border: 5px solid white; margin-top: 20px; }
@@ -19,7 +18,7 @@ $lines = array_reverse(explode("\n", trim($log))); // Jüngste Einträge oben
 </head>
 <body>
   <h1>ESP32-CAM Bild</h1>
-  <img src="uploads/cam.jpg?<?php echo time(); ?>" alt="Live Bild">
+  <img id="camImage" src="uploads/cam.jpg?<?php echo time(); ?>" alt="Live Bild">
   <p>Letztes Update: <?php echo date("H:i:s"); ?></p>
 
   <h2>ESP32-CAM Fernsteuerung</h2>
@@ -46,10 +45,43 @@ $lines = array_reverse(explode("\n", trim($log))); // Jüngste Einträge oben
 
   <hr>
   <h2>Bewässerungsprotokoll</h2>
-  <div class="log">
-    <?php foreach ($lines as $line): ?>
-      <p class="<?= strpos($line, '❌') !== false ? 'error' : '' ?>"><?= htmlspecialchars($line) ?></p>
-    <?php endforeach; ?>
+  <div class="log" id="logContainer">
+    <!-- Log wird hier dynamisch eingefügt -->
   </div>
+
+  <script>
+function updateImage() {
+  const img = document.getElementById('camImage');
+  img.src = "uploads/cam.jpg?" + new Date().getTime();
+}
+
+function updateLog() {
+  fetch("log.txt")
+    .then(res => res.text())
+    .then(text => {
+      const lines = text.trim().split("\n").reverse();
+      const logContainer = document.getElementById("logContainer");
+      logContainer.innerHTML = "";
+
+      lines.forEach(line => {
+        const p = document.createElement("p");
+        p.textContent = line;
+        if (line.includes("❌")) p.classList.add("error");
+        logContainer.appendChild(p);
+      });
+    });
+}
+
+// Alle 10 Sekunden updaten
+setInterval(() => {
+  updateImage();
+  updateLog();
+}, 10000);
+
+// Initial einmal aufrufen
+updateImage();
+updateLog();
+</script>
+  
 </body>
 </html>
