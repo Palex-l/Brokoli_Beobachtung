@@ -16,7 +16,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['ml'])) {
       file_put_contents('log.txt', $entry, FILE_APPEND);
  
       // Fehlermeldung zurück zur Website
-      header('Location: index.php?error=toobig');
+      //header('Location: index.php?error=toobig');
+      echo "Eingabe zu groß"; // für ESP sichtbar
       exit;
     }
     if ($ml > 0 && $ml <= 200) {
@@ -26,7 +27,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['ml'])) {
         // Funktioniert nur, wenn dein Render-Container >20s Scriptausführung erlaubt
         ignore_user_abort(true);
         flush(); // sende Antwort sofort
-        header('Location: index.php?ok=1');
+        echo "Befehl angenommen"; // für ESP sichtbar
+        exit;
         
         // 3. Warte 20 Sekunden auf Verarbeitung durch ESP
         sleep(60);
