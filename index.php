@@ -28,6 +28,14 @@ $lines = array_reverse(explode("\n", trim($log))); // Jüngste Einträge oben
     <input type="number" name="ml" placeholder="Menge in ml" required min="1">
     <button type="submit">Pumpe starten</button>
   </form>
+  <?php
+   if (isset($_GET['ok'])) {
+      echo "<p style='color:lightgreen;'>✅ Befehl gesendet!</p>";
+   }
+   if (isset($_GET['error']) && $_GET['error'] === 'toobig') {
+    echo "<p style='color:red; font-weight:bold;'>❌ Fehler: Eingabe zu groß (max. 200 ml erlaubt)</p>";
+   }
+   ?>
 
   <hr>
   <h2>Bewässerungsprotokoll</h2>
