@@ -1,3 +1,8 @@
+<?php
+$error = file_exists("last_error.txt") ? file_get_contents("last_error.txt") : null;
+$log = file_exists("watering_log.txt") ? file("watering_log.txt") : [];
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,6 +12,8 @@
     body { text-align: center; font-family: sans-serif; background: #111; color: white; }
     img { max-width: 90%; border: 5px solid white; margin-top: 20px; }
     input, button { padding: 10px; font-size: 16px; }
+    .error { color: red; font-weight: bold; }
+    .log { margin-top: 20px; background: #222; padding: 10px; border-radius: 8px; display: inline-block; text-align: left; }
   </style>
 </head>
 <body>
@@ -20,6 +27,14 @@
     <input type="number" name="ml" placeholder="Menge in ml" required min="1">
     <button type="submit">Pumpe starten</button>
   </form>
-  <?php if (isset($_GET['ok'])) echo "<p>Befehl gesendet!</p>"; ?>
+
+  <?php if ($error): ?>
+    <p class="error">❌ Letzte Bewässerung fehlgeschlagen:<br><?= htmlspecialchars($error) ?></p>
+  <?php endif; ?>
+
+  <div class="log">
+    <h3>Log vergangener Bewässerungen:</h3>
+    <pre><?php foreach (array_reverse($log) as $line) echo htmlspecialchars($line); ?></pre>
+  </div>
 </body>
 </html>
