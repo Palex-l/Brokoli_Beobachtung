@@ -18,7 +18,8 @@ $lines = array_reverse(explode("\n", trim($log))); // Jüngste Einträge oben
 </head>
 <body>
   <h1>ESP32-CAM Bild</h1>
-  <img id="camImage" src="uploads/cam.jpg?<?php echo time(); ?>" alt="Live Bild">
+  <img id="camImage" src="uploads/cam.jpg" alt="Live Bild"
+       onerror="this.onerror=null; this.src='placeholder.jpg';">
   <p>Letztes Update: <?php echo date("H:i:s"); ?></p>
 
   <h2>ESP32-CAM Fernsteuerung</h2>
@@ -50,9 +51,20 @@ $lines = array_reverse(explode("\n", trim($log))); // Jüngste Einträge oben
   </div>
 
   <script>
-    function updateImage() {
+  function updateImage() {
     const img = document.getElementById('camImage');
-    img.src = "uploads/cam.jpg?" + new Date().getTime();
+    const testImg = new Image();
+    const newSrc = "uploads/cam.jpg?" + new Date().getTime();
+
+    testImg.onload = function () {
+      img.src = newSrc;
+    };
+
+    testImg.onerror = function () {
+      img.src = "placeholder.jpg";
+    };
+
+    testImg.src = newSrc;
   }
 
   function updateLog() {
