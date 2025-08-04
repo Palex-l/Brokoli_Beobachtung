@@ -28,7 +28,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['ml'])) {
         ignore_user_abort(true);
         flush(); // sende Antwort sofort
         //echo "Befehl angenommen"; // für ESP sichtbar
-        exit;
+        //exit;
         
         // 3. Warte 20 Sekunden auf Verarbeitung durch ESP
         sleep(60);
