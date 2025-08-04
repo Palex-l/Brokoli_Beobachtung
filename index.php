@@ -16,6 +16,7 @@ $lines = array_reverse(explode("\n", trim($log))); // Jüngste Einträge oben
   </style>
 </head>
 <body>
+  <p style="text-align:right; margin: 10px;"><a href="?logout=1" style="color:gray;">🚪 Logout</a></p>
   <h1>ESP32-CAM Bild</h1>
   <img id="camImage" src="uploads/cam.jpg" alt="Live Bild"
        onerror="this.onerror=null; this.src='placeholder.jpg';">
@@ -65,7 +66,6 @@ $lines = array_reverse(explode("\n", trim($log))); // Jüngste Einträge oben
 
     testImg.src = newSrc;
   }
-  <p><a href="?logout=1" style="color:gray;">🚪 Logout</a></p>
   function updateLog() {
     fetch("log.txt")
       .then(res => res.text())
