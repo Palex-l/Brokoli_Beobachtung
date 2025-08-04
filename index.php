@@ -36,5 +36,10 @@ $lines = array_reverse(explode("\n", trim($log))); // Jüngste Einträge oben
       <p class="<?= strpos($line, '❌') !== false ? 'error' : '' ?>"><?= htmlspecialchars($line) ?></p>
     <?php endforeach; ?>
   </div>
+  <script>
+    setTimeout(() => {
+    fetch("check_pump_status.php").then(r => r.text()).then(console.log);
+    }, 15000);
+  </script>
 </body>
 </html>
