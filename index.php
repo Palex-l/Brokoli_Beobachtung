@@ -22,6 +22,13 @@ $lines = array_reverse(explode("\n", trim($log))); // Jüngste Einträge oben
   <img src="uploads/cam.jpg?<?php echo time(); ?>" alt="Live Bild">
   <p>Letztes Update: <?php echo date("H:i:s"); ?></p>
 
+  <h2>ESP32-CAM Fernsteuerung</h2>
+  <form method="POST" action="camera_command.php">
+    <button name="cmd" value="once">📸 Bild aufnehmen</button>
+    <button name="cmd" value="stream">🔁 Stream starten</button>
+    <button name="cmd" value="stop">🛑 Stream stoppen</button>
+  </form>
+  
   <hr>
   <h2>Pumpe steuern</h2>
   <form action="pump_trigger.php" method="POST">
