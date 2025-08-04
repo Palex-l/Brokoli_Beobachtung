@@ -1,9 +1,4 @@
 <?php
-$log = file_exists('log.txt') ? file_get_contents('log.txt') : '';
-$lines = array_reverse(explode("\n", trim($log))); // Jüngste Einträge oben
-?>
-
-<?php
 session_start();
 
 $correctPassword = "hanfwasser99"; // <- Hier dein geheimes Passwort
@@ -30,9 +25,10 @@ if (isset($_GET['logout'])) {
 if (!isset($_SESSION['auth'])):
 ?>
 
-
-
-
+<?php
+$log = file_exists('log.txt') ? file_get_contents('log.txt') : '';
+$lines = array_reverse(explode("\n", trim($log))); // Jüngste Einträge oben
+?>
 
 
 <!DOCTYPE html>
