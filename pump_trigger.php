@@ -9,7 +9,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['ml'])) {
     }
 
     // 2. Neuer Pumpbefehl: eintragen
-    if ($ml > 0 && $ml <= 1000) {
+    if ($ml > 200) {
+      header('Location: index.php?error=toobig');
+      exit;
+    }
+    if ($ml > 0 && $ml <= 200) {
         file_put_contents('pump_queue.txt', $ml);
 
         // Start Timeout-Überwachung (asynchron über PHP sleep)
