@@ -2,6 +2,56 @@
 $log = file_exists('log.txt') ? file_get_contents('log.txt') : '';
 $lines = array_reverse(explode("\n", trim($log))); // Jüngste Einträge oben
 ?>
+
+<?php
+session_start();
+
+$correctPassword = "hanfwasser99"; // <- Hier dein geheimes Passwort
+
+// Login-Verarbeitung
+if (isset($_POST['login'])) {
+    if ($_POST['password'] === $correctPassword) {
+        $_SESSION['auth'] = true;
+        header("Location: index.php");
+        exit;
+    } else {
+        $loginError = "❌ Falsches Passwort";
+    }
+}
+
+// Logout
+if (isset($_GET['logout'])) {
+    session_destroy();
+    header("Location: index.php");
+    exit;
+}
+
+// Loginmaske anzeigen, wenn nicht eingeloggt
+if (!isset($_SESSION['auth'])):
+?>
+
+
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head><title>Login</title></head>
+<body style="text-align:center; margin-top:50px; font-family:sans-serif;">
+  <h2>🔐 Passwort erforderlich</h2>
+  <?php if (isset($loginError)) echo "<p style='color:red;'>$loginError</p>"; ?>
+  <form method="POST">
+    <input type="password" name="password" placeholder="Passwort" style="padding:10px;"><br><br>
+    <button name="login" style="padding:10px;">Einloggen</button>
+  </form>
+</body>
+</html>
+<?php exit; endif; ?>
+
+
+
+
 <!DOCTYPE html>
 <html>
 <head>
