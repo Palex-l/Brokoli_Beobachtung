@@ -34,6 +34,7 @@ $log = file_exists("watering_log.txt") ? file("watering_log.txt") : [];
 
   <div class="log">
     <h3>Log vergangener Bewässerungen:</h3>
+    <pre><?php var_dump($log); ?></pre>
     <pre><?php foreach (array_reverse($log) as $line) echo htmlspecialchars($line); ?></pre>
   </div>
 </body>
