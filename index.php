@@ -1,6 +1,6 @@
 <?php
-$error = file_exists("last_error.txt") ? file_get_contents("last_error.txt") : null;
-$log = file_exists("watering_log.txt") ? file("watering_log.txt") : [];
+$log = file_exists('log.txt') ? file_get_contents('log.txt') : '';
+$lines = array_reverse(explode("\n", trim($log))); // Jüngste Einträge oben
 ?>
 
 <!DOCTYPE html>
@@ -12,8 +12,9 @@ $log = file_exists("watering_log.txt") ? file("watering_log.txt") : [];
     body { text-align: center; font-family: sans-serif; background: #111; color: white; }
     img { max-width: 90%; border: 5px solid white; margin-top: 20px; }
     input, button { padding: 10px; font-size: 16px; }
+    .log { text-align: left; margin: 20px auto; width: 90%; max-width: 600px; background: #222; padding: 10px; border-radius: 8px; }
+    .log p { margin: 2px; font-size: 14px; }
     .error { color: red; font-weight: bold; }
-    .log { margin-top: 20px; background: #222; padding: 10px; border-radius: 8px; display: inline-block; text-align: left; }
   </style>
 </head>
 <body>
@@ -28,14 +29,12 @@ $log = file_exists("watering_log.txt") ? file("watering_log.txt") : [];
     <button type="submit">Pumpe starten</button>
   </form>
 
-  <?php if ($error): ?>
-    <p class="error">❌ Letzte Bewässerung fehlgeschlagen:<br><?= htmlspecialchars($error) ?></p>
-  <?php endif; ?>
-
+  <hr>
+  <h2>Bewässerungsprotokoll</h2>
   <div class="log">
-    <h3>Log vergangener Bewässerungen:</h3>
-    <pre><?php var_dump($log); ?></pre>
-    <pre><?php foreach (array_reverse($log) as $line) echo htmlspecialchars($line); ?></pre>
+    <?php foreach ($lines as $line): ?>
+      <p class="<?= strpos($line, '❌') !== false ? 'error' : '' ?>"><?= htmlspecialchars($line) ?></p>
+    <?php endforeach; ?>
   </div>
 </body>
 </html>
