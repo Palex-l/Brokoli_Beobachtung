@@ -24,6 +24,10 @@ if (isset($_GET['logout'])) {
 // Loginmaske anzeigen, wenn nicht eingeloggt
 if (!isset($_SESSION['auth'])):
 ?>
+<?php
+$log = file_exists('log.txt') ? file_get_contents('log.txt') : '';
+$lines = array_reverse(explode("\n", trim($log))); // Jüngste Einträge oben
+?>
 <!DOCTYPE html>
 <html>
 <head><title>Login</title></head>
