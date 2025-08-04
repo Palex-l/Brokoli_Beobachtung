@@ -1,45 +1,7 @@
 <?php
-session_start();
-
-$correctUser = "admin";
-$correctPass = "geheim123";
-
-if (isset($_POST['login'])) {
-    if ($_POST['username'] === $correctUser && $_POST['password'] === $correctPass) {
-        $_SESSION['auth'] = true;
-        header("Location: index.php");
-        exit;
-    } else {
-        $loginError = "❌ Falscher Benutzername oder Passwort";
-    }
-}
-
-if (isset($_GET['logout'])) {
-    session_destroy();
-    header("Location: index.php");
-    exit;
-}
-
-if (!isset($_SESSION['auth'])):
-?>
-<?php
 $log = file_exists('log.txt') ? file_get_contents('log.txt') : '';
 $lines = array_reverse(explode("\n", trim($log))); // Jüngste Einträge oben
 ?>
-<!DOCTYPE html>
-<html>
-<head><title>Login</title></head>
-<body style="text-align:center; margin-top:50px; font-family:sans-serif;">
-  <h2>🔐 Login</h2>
-  <?php if (isset($loginError)) echo "<p style='color:red;'>$loginError</p>"; ?>
-  <form method="POST">
-    <input type="text" name="username" placeholder="Benutzername"><br><br>
-    <input type="password" name="password" placeholder="Passwort"><br><br>
-    <button name="login">Einloggen</button>
-  </form>
-</body>
-</html>
-<?php exit; endif; ?>
 <!DOCTYPE html>
 <html>
 <head>
