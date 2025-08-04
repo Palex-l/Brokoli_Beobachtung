@@ -50,27 +50,27 @@ $lines = array_reverse(explode("\n", trim($log))); // Jüngste Einträge oben
   </div>
 
   <script>
-function updateImage() {
-  const img = document.getElementById('camImage');
-  img.src = "uploads/cam.jpg?" + new Date().getTime();
-}
+    function updateImage() {
+    const img = document.getElementById('camImage');
+    img.src = "uploads/cam.jpg?" + new Date().getTime();
+  }
 
-function updateLog() {
-  fetch("log.txt")
-    .then(res => res.text())
-    .then(text => {
-      const lines = text.trim().split("\n").reverse();
-      const logContainer = document.getElementById("logContainer");
-      logContainer.innerHTML = "";
+  function updateLog() {
+    fetch("log.txt")
+      .then(res => res.text())
+      .then(text => {
+        const lines = text.trim().split("\n").reverse();
+        const logContainer = document.getElementById("logContainer");
+        logContainer.innerHTML = "";
 
-      lines.forEach(line => {
-        const p = document.createElement("p");
-        p.textContent = line;
-        if (line.includes("❌")) p.classList.add("error");
-        logContainer.appendChild(p);
+        lines.forEach(line => {
+          const p = document.createElement("p");
+          p.textContent = line;
+          if (line.includes("❌")) p.classList.add("error");
+          logContainer.appendChild(p);
+        });
       });
-    });
-}
+  }
 
 // Alle 10 Sekunden updaten
 setInterval(() => {
