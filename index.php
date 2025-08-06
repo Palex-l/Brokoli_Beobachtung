@@ -70,7 +70,6 @@ $lines = array_reverse(explode("\n", trim($log))); // Jüngste Einträge oben
    <button name="cmd" value="once">📸 Bild aufnehmen</button>
    <button name="cmd" value="stream">🔁 Stream starten</button>
    <button name="cmd" value="stop">🛑 Stream stoppen</button>
-   <button name="cmd" value="reset" style="background:red; color:white;">🔁 Kamera neustarten</button>
  </form>
   
   <hr>
