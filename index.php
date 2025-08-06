@@ -65,12 +65,13 @@ $lines = array_reverse(explode("\n", trim($log))); // Jüngste Einträge oben
        onerror="this.onerror=null; this.src='placeholder.jpg';">
   <p>Letztes Update: <?php echo date("H:i:s"); ?></p>
 
-  <h2>ESP32-CAM Fernsteuerung</h2>
-  <form method="POST" action="camera_command.php">
-    <button name="cmd" value="once">📸 Bild aufnehmen</button>
-    <button name="cmd" value="stream">🔁 Stream starten</button>
-    <button name="cmd" value="stop">🛑 Stream stoppen</button>
-  </form>
+ <h2>ESP32-CAM Fernsteuerung</h2>
+ <form method="POST" action="camera_command.php">
+   <button name="cmd" value="once">📸 Bild aufnehmen</button>
+   <button name="cmd" value="stream">🔁 Stream starten</button>
+   <button name="cmd" value="stop">🛑 Stream stoppen</button>
+   <button name="cmd" value="reset" style="background:red; color:white;">🔁 Kamera neustarten</button>
+ </form>
   
   <hr>
   <h2>Pumpe steuern</h2>
