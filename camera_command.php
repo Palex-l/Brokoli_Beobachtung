@@ -1,6 +1,6 @@
 <?php
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['cmd'])) {
-    $valid = ['once', 'stream', 'stop', 'idle', 'reset'];
+    $valid = ['once', 'stream', 'stop', 'idle'];
     $cmd = $_POST['cmd'];
 
     if (in_array($cmd, $valid)) {
