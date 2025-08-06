@@ -64,6 +64,28 @@ $lines = array_reverse(explode("\n", trim($log))); // Jüngste Einträge oben
   <img id="camImage" src="uploads/cam.jpg" alt="Live Bild"
        onerror="this.onerror=null; this.src='placeholder.jpg';">
   <p>Letztes Update: <?php echo date("H:i:s"); ?></p>
+  <h2>Kameraeinstellungen</h2>
+   <form method="POST" action="camera_settings.php">
+     <label>Auflösung:</label>
+       <select name="res">
+         <option value="UXGA">UXGA (1600x1200)</option>
+         <option value="SXGA">SXGA (1280x1024)</option>
+         <option value="XGA">XGA (1024x768)</option>
+         <option value="SVGA">SVGA (800x600)</option>
+         <option value="VGA">VGA (640x480)</option>
+         <option value="QVGA">QVGA (320x240)</option>
+  </select>
+  <br><br>
+  <label>JPEG-Qualität:</label>
+  <select name="qual">
+    <?php for ($i = 0; $i <= 63; $i++): ?>
+      <option value="<?= $i ?>"><?= $i ?> <?= $i == 0 ? "(beste)" : "" ?></option>
+    <?php endfor; ?>
+  </select>
+
+  <br><br>
+  <button type="submit">💾 Speichern</button>
+</form>
 
  <h2>ESP32-CAM Fernsteuerung</h2>
  <form method="POST" action="camera_command.php">
